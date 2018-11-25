@@ -2,26 +2,28 @@ var operacion = prompt('Elija el simbolo de la operacion a realizar ' + '(+, -, 
 var numeroUno = parseInt(prompt('Ingrese un número'))
 var numeroDos = parseInt(prompt('Ingrese otro número'))
 
+var resultado
+
 switch(operacion) {
     case '+':
-        document.write(numeroUno + numeroDos)
+        resultado = numeroUno + numeroDos
         break
     case '-':
-        document.write(numeroUno - numeroDos)
+        resultado = numeroUno - numeroDos
         break
     case '*':
-        document.write(numeroUno * numeroDos)
+        resultado = numeroUno * numeroDos
         break
-    case '/':
+    default:
         do {
             if(numeroDos === 0){
-                numeroDos = parseInt(prompt('Ingrese otro número'))
+                numeroDos = parseInt(prompt('Ingrese otro número diferente a 0'))
             }
             
         } while (numeroDos === 0)
 
-        document.write(numeroUno / numeroDos)
+        resultado = numeroUno / numeroDos
 }
 
-
+document.write(resultado)
 
