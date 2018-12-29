@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Clase 9</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+</head>
+
+<body>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <div id="container" class="container">
+    <h2 class="text-center">Home</h2>
+    <div class="text-right">
+      <button class='btn btn-danger' onclick='cerrarSesion()'>Cerrar sesion</button>
+      <button id="ver-usuario" class='btn btn-default'>Ver Usuarios</button>
+    </div>
+    <div id="lista-usuario" class="text-center invisible">
+      <div>
+        <ul id="lista-items" class="list-group">
+          <!-- <li class="list-group-item"></li> -->
+        </ul>
+      </div>
+      <div>
+        <button class='btn btn-info' onclick="agregarUsuario()">Agregar usuario</button>
+      </div>
+      <script src="login.js"></script>
+    </div>
+</body>
+
+</html>
