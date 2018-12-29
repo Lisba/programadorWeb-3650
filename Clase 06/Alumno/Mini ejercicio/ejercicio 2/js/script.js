@@ -1,11 +1,16 @@
-var numeros = []
-    
-var prompt = numeros.push(parseInt(prompt('Escriba 5 números separados por coma ","')))
+var numeros = prompt('Escriba 5 números separados por coma ","').split(",")
 
-function sumarNumeros (numeros) {
-  var result = numeros.reduce((a, b) => a + b)
+function sumarNumeros (numerosParametro) {
   
-  return result
+  var suma = 0
+  
+  numerosParametro.forEach(numerosParametro => {
+    var numerosArray = parseInt(numerosParametro)
+    
+    suma += numerosArray
+  })
+
+  return suma
 }
 
 console.log(sumarNumeros(numeros))
