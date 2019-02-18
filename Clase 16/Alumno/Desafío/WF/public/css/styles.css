@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: Starwars;
+  src: local("Starwars"), url(../fonts/Starjedi.ttf);
+  font-weight: bold;
+}
+
+#root {
+  margin-top: 50px;
+  font-family: 'Starwars';
+  color: rgb(255, 255, 255);
+  letter-spacing: 2px;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../img/starWarsVertical.jpg);
+  background-position: 50% 25%;
+  background-size: cover;
+}
+
+body h1,
+body h3 {
+  text-align: center;
+  margin: 3%;
+}
+
+.h1home {
+  font-size: 800%;
+}
+
+body .nav {
+  background-color: rgb(82, 82, 80);
+}
+
+body .nav li a,
+.logo {
+  color: rgb(172, 172, 165);
+  font-family: Starwars;
+  src: local("Starwars"), url(../fonts/Starjedi.ttf);
+  font-weight: bold;
+}
+
+body ul li:first-child {
+  width: 12%;
+  margin: 0.5% 1% 0.5%;
+}
+
+body ul li img {
+  display: inline;
+  margin: 1% 1%;
+  padding: 1%;
+}
+
+body .logo{
+  font-size: 110%;
+  color: rgb(224, 194, 18);
+  display: inline;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+#root .table {
+  width: 90%;
+  margin: 1% auto 2%;
+}
+
+.buttonvr {
+  display: block;
+  width: 20%;
+  margin: 0 auto 2%;
+}
+
+.btn-primary {
+  width: 100%;
+}
+
+.save-btn {
+  width: 80%;
+  margin: 5% auto;
+}

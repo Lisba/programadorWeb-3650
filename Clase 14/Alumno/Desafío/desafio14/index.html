@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="icon" href="favicon.png">
+    <title>Desafío 14</title>
+</head>
+<body>
+    <!-- Eliminar un elemento usando una animación de jQuery -->
+    
+    <table class="table table-hover table-dark" style="width: 80%; margin: auto;">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Género</th>
+                <th scope="col">Altura</th>
+                <th scope="col">Peso</th>
+                <th scope="col">Color de Ojos</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="fila_uno">
+                <th scope="row">1</th>
+                <td>Juan</td>
+                <td>Hombre</td>
+                <td>1.70 m</td>
+                <td>80 kg</td>
+                <td>Marrón</td>
+                <td><button id="btn_uno" type="button" class="btn btn-danger">Eliminar</button></td>
+            </tr>
+            <tr id="fila_dos">
+                <th scope="row">2</th>
+                <td>Pedro</td>
+                <td>Hombre</td>
+                <td>1.82 m</td>
+                <td>83 kg</td>
+                <td>Azul</td>
+                <td><button id="btn_dos" type="button" class="btn btn-danger">Eliminar</button></td>
+            </tr>
+            <tr id="fila_tres">
+                <th scope="row">3</th>
+                <td>Andrea</td>
+                <td>Mujer</td>
+                <td>1.60 m</td>
+                <td>60 kg</td>
+                <td>Verde</td>
+                <td><button id="btn_tres" type="button" class="btn btn-danger">Eliminar</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

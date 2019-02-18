@@ -1,0 +1,373 @@
+_ ¿Qué es SPA (Single page application) y para qué sirve?
+
+	_ Es una pagina web que se carga una unica vez y recibe intereaccion del usuario para cambiar sus subcontenidos
+	
+	_ Ejemplo de una: https://reneza.com/
+	
+	_ Hasta ahora veniamos haciendo todo de forma muy desestrucutrada, ahora, le vamos a dar una estructura mas formal a nuestra pagina
+	
+_ Creación e instalación de la estructura de un proyecto SPA
+
+	_ Para hacer todo lo que tenemos que hacer, usemos el Visual Studio Code, donde vamos a crear una carpeta que se llame WorkshopFinal
+	
+	_ Tenemos que tener en claro, que vamos a tener un servidor local, donde corre nuestra aplicacion frontend
+	
+	_ A partir de ahora, nuestra aplicacion va a ser accesible desde una URL: localhost
+
+	_ Organización de las carpetas del proyecto
+	
+		_ Creamos 2 carpetas:
+		
+			_ public: 
+			
+				_ va a tener todo lo que va a ser visible desde la pagina (index.html, imagenes, css)
+				
+				_ creamos un archivo index.html, nuestro html principal:
+				
+					<!DOCTYPE html>
+					<html lang="en">
+					<head>
+					  <meta charset="UTF-8">
+					  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+					  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+					  <link rel="tab icon" href="./favicon.png">
+					  <title>Workshop Final</title>
+					</head>
+					<body>
+					  <script src="./js/index.js"></script>
+					</body>
+					</html>
+					
+				_ Agregamos el favicon.png
+
+			
+			_ src: donde vamos a tener el codigo JS sin procesar (todo lo que no sea la inclusion de jquery y bootstrap)
+			
+		_ creacion de package.json:
+		
+			_ Si alguien no tiene NodeJs instalado en la maquina, hay que instalarlo bajandolo desde: https://nodejs.org/es/download/
+			
+			_ En la carpeta raiz del proyecto, creamos un archivo llamado package.json, el cual tendra todas las dependencias que necesitamoy y la informacion del proyecto
+			
+			_ Abrimos la consola del Visual Studio Code, y ejecutamos el siguiente comando: npm init -y
+			
+			_ Luego, volvemos al archivo package.json, y completamos nuestra informacion:
+			
+				{
+				  "name": "workshop-final",
+				  "version": "1.0.0",
+				  "description": "Workshop final",
+				  "main": "index.js",
+				  "scripts": {
+					"test": "echo \"Error: no test specified\" && exit 1"
+				  },
+				  "author": "Victor Di Lena",
+				  "license": "ISC"
+				}
+				
+		_ Instalacion de las dependencias de nuestro proyecto:
+		
+			_ Para poder trabajar comodamente con nuestra SPA, necesitamos varias dependendencias.
+			
+			_ Cuando descarguemos a nuestra maquina las dependencias, se van a agregar a una carpeta creada automaticamente con nombre node-modules y el package.json, se va a actualizar automaticamente con la dependencia
+			
+			_ Otra cosa que va a pasar cuando se vayan descargando las dependencias, es que se va a crear y cargar automaticamente, un archivo llamado package-lock.json, que nos muestra las instalaciones que vamos haciendo, con las rutas desde donde se descargaron.
+			
+			_ Necesitamos bajar las siguientes dependencias:
+			
+				_ Jquery: para manipular el DOM
+				
+					_ npm install jquery
+				
+				_ Bootstrap y popper: necesario para facilitar el diseño de la SPA y popper, es requerido para que funcione bien SPA con bootstrap
+				
+					_ npm install bootstrap@4.1.2 popper.js@^1.14.3
+					
+				_ Crossroad: nos va a permitir manejar nuestra aplicacion con rutas
+				
+					_ npm install crossroads
+				
+				_ Http-server (global): nos va a permitir hacer el manejo de HTTP request de forma local
+				
+					_ npm install http-server -g
+				
+				_ Webpack (Puede tardar un poco): nos va a permitir juntar todo el contenido de nuestro proyecto, en un solo archivo
+				
+					_ npm install --save-dev webpack webpack-cli
+				
+				_ Style	y CSS loaders: nos permite importar los css en nuestros archivos JS
+					
+					_ npm install --save-dev style-loader css-loader
+					
+			_ Configuraciones:
+			
+				_ Vamos a hacer algunas configuraciones para hacer funcionar nuestro proyecto de forma sencilla:
+				
+					_ webpack:
+					
+						_ Vamos a crear en la carpeta root, un archivo llamado webpack.config.js.
+						
+						_ Vamos a pegar en ese archivo, exactamente el siguiente codigo, el cual va a manejar automaticamente todas las herramientas que necesitamos de Jquery, css y las importaciones de estos ultimos:
+						
+							var webpack = require('webpack')
+
+							module.exports = {
+							  entry: [ __dirname + '/src/index.js' ],
+							  output: {
+								path: __dirname + '/public/js/',
+								filename: 'index.js'
+							  },
+							  module: {
+								rules: [
+								  {
+									test: /\.css$/,
+									use: [ 'style-loader', 'css-loader' ]
+								  }
+								]
+							  },
+							  plugins: [
+								new webpack.ProvidePlugin({
+								  $: 'jquery',
+								  jQuery: 'jquery'
+								})
+							  ],
+							  watch: true
+							}
+							
+					_ package.json.
+					
+						_ Vamos a agregar en el package.json lo siguiente, dentro de scripts:
+						
+							"scripts": {
+								"server": "http-server",
+								"start": "webpack --mode=development",
+								"build": "webpack --mode=production",
+								"test": "echo \"Error: no test specified\" && exit 1"
+							  },
+							  
+						_ Esto nos va a permitir iniciar Webpack en modo desarrollo corriendo el comando npm start en consola, y luego abrimos otra consola, y ejecutamos npm run server (no usarlo hasta que este creado el index.js el npm start)
+						
+						_ Si corremos npm build lo hacemos en modo producción.
+						
+		_ Archivos principales de nuestra aplicación
+		
+			_ En src/ debemos crear el archivo index.js y dentro al comienzo el código:
+			
+				import 'jquery'
+				import 'popper.js'
+				import 'bootstrap'
+				import 'bootstrap/dist/css/bootstrap.min.css'
+				import './js/app'
+				
+				_ Esto va a agregar Popover.js, Boostrap, sus estilos y nuestros archivos de JavaScript y CSS principales y a nuestro proyecto.
+				
+				_ el index.js, es el archivo donde va a estar toda la configuracion JS agregada
+				
+			_ En src/js/ debemos crear el archivo app.js que va a ser el archivo JavaScript principal de nuestra aplicación.
+			
+			_ En src/css/ debemos crear el archivo styles.css que va a ser el archivo CSS principal de nuestra aplicación.
+			
+			_ Luego agregar en nuestro public/index.html el siguiente tag,para incluir el Js de configuracion:
+			
+				<script src="./js/index.js"></script>
+				
+				_ Como Webpack compila todo el código en el archivo public/index.js no es necesario importar nada más.
+				
+		_ Como usarlo?
+		
+			_ Vamos a trabajar todo el js y css en las carpetas de src
+			
+			_ Vamos a levantar nuestro servidor con npm start y luego abrimos otra consola para levantar el servidor, con npm run server
+			
+			_ Cada vez que hagamos un cambio, se va a actualizar automaticamente nuestro navegador
+			
+			_ Para ver el contenido, tenemos que poner en el navegador, la siguiente URL: http://localhost:8080/
+			
+_ Module Pattern
+
+	_ Que es?
+
+		_ Patron de diseño que se usa en JS para dividir partes del codigo y agrupar en funcionalidades.
+		
+		_ Lo vamos a usar con importaciones en nuestro codigo, gracias a Webpack
+		
+	_ Creando un modulo
+	
+		_ Creamos un modulo para manejar el guardado y obtencion de datos del localStorage:
+		
+			_ Creamos dentro de la carpeta src/js, una carpeta llamada utils
+			
+			_ Dentro de la ultima carpeta, creamos un archivo llamado localStorage.js
+			
+			_ En localStorage.js, implementamos las funciones que nos van a servir para manejo de localStorage. Agregamos el siguiente codigo:
+			
+				function getLocalList (key) {
+				  if (typeof key === 'string') {
+					var localList = localStorage.getItem(key)
+					if (localList) {
+					  var parsedList = JSON.parse(localList)
+					  return parsedList
+					} else {
+					  return []
+					}
+				  }
+				}
+				
+				function setLocalList (key, list) {
+				  if (typeof key === 'string' && Array.isArray(list)) {
+					var strList = JSON.stringify(list)
+					localStorage.setItem(key, strList)
+				  }
+				}
+			_ Al final del archivo, agregamos lo que nos va a dejar exportarlo como modulo:
+			
+				export { getLocalList, setLocalList } // (Esto se va a usar mucho en React)
+				
+	_ Importar modulo:
+	
+		_ Ahora, lo que exportamos hace un rato, tenemos que importarlo donde querramos usarlo
+			
+			_ Por ejemplo, si queremos usarlo en app.js, hacemos lo siguiente.
+			
+				_ En app.js, agregamos la siguiente linea:
+				
+					_ import { setLocalList } from './utils/localStorage'
+					
+				_ Ahora si quiero usar las funciones del modulo, solo tengo que llamarlas, por ejemplo, en app.js:
+				
+					setLocalList('Personajes', [ "Luke", "Han", "Leia", "Obi Wan" ])
+				
+_ Router de una SPA
+
+	_ Que hace?
+
+		_ Nos permite entrar a diferentes secciones de nuestra SPA, solo cambiando la URL
+		
+		_ Simula que se cambia de pagina, sin la necesidad de recargar la pagina y sin salir del index.html
+					
+	_ Crossroad:
+	
+		_ Nos permite ejcutar codigo, dependiendo de la URL que el usuario elija acceder
+		
+	_ Creacion de rutas:
+	
+		_ Creamos un archivo llamado router.js, en la carpeta src/js.
+		
+		_ Importamos dentro de app.js, al archivo router: import './router'	
+		
+		_ En router.js, comenzamos a crear nuestras rutas:
+		
+			import crossroads from 'crossroads'
+
+			crossroads.addRoute('/', function () {
+			  console.log('Home page')
+			})
+
+			crossroads.addRoute('#/personajes', function () {
+				console.log('Pagina de personajes')
+			})
+			
+			// En cada cambio del # va a verificar las rutas
+			$(window).on('hashchange', function () {
+			  crossroads.parse(window.location.hash)
+			})
+
+			crossroads.parse(window.location.hash) // necesario para que puedan funcionar varias paginas desde una sola
+			
+		_ Ahora, para ver los cambios, reiniciamos ambas instancias de node que habiamos levantado, y podemos probar las siguientes rutas:
+		
+			_ http://localhost:8080 (Home)
+			
+			_ http://localhost:8080/#/personajes
+			
+		_ ES IMPORTANTE REFRESCAR EL CONTENIDO, CON CONTROL + F5, YA QUE PERSISTE MUCHO EL CACHE
+			
+			
+_ Load de jQuery (carga de HTML dentro de componentes)
+
+	_ Que hace y como se usa?
+	
+		_ el metodo load() de jQuery, nos permite cargar HTML de forma dinamica
+		
+		_ ademas, nos permite ejecutar una funcion de callback cuando se termmino de cargar el contenido
+		
+		_ ejemplo:
+		
+			_ Agrego lo siguiente en index.html.
+			
+				<body>
+				  <div id="root"></div>
+				  <script src="./js/index.js"></script>
+				</body>
+				
+			_ Creo un nuevo archivo, llamado public/partials/home.html, en la misma carpeta que home.html, y le agrego:
+			
+				<h1>Home page</h1>
+				
+				_ En partials, van a ir las subvistas que vamos a utilizar para cada seccion
+				
+			_ Luego, en route.js, agrego dentro de la ruta del home, lo siguiente:
+			
+				crossroads.addRoute('/', function () {
+					$('#root').load('./partials/home.html', function () {
+						console.log('Se cargo la home')
+					})
+				})
+				
+				_ De esta manera, estamos agregando contenido dinamico, dentro del div con id root
+				
+	_ Patrón MVC
+	
+		_ Que es?
+		
+			_ Es un patron de diseño, que nos permite organizar nuestro codigo, dividiendo la funcionalidad en 3 partes diferentes
+			
+			_ Model:
+			
+				_ Encargado de manipular las fuentes de datos, permisos y accesos
+				
+				_ En nuestro caso lo usariamos con el localStorage o los datos que vienen de una API
+				
+			_ View.
+			
+				_ Es lo que se ve por pantalla
+				
+				_ En nustro caso, vendria a ser el HTML
+				
+			_ Controller:
+			
+				_ Es lo que va a procesar la informacion que es solicitada desde la vista, y generar las respuestas del modelo
+				
+				_ En nuestro caso, son los archivos JS que usamos para generar un procesamiento, como lo que usamos para validar formularios y es el que vamos a implementar en cada archivo controller.
+				
+		
+		_ Cargar controladores con jQuery
+		
+			_ Al usar el motodo load(), estamos generando una Vista, y cuando se ejecuta el callback del load(), estamos ejecutando el Controlador asociado a la Vista
+			
+			_ Vamos a usar un Controlador por cada Vista
+			
+			_ Para hacer esto, vamos a crear una carpeta src/js/controllers donde vamos a incluir nuestros controllers
+			
+			_ Dentro de dicha carpeta, creamos el archivo homeController.js, en el que agregamos el siguiente contenido:
+			
+				function homeController() {
+					var parrafo = $("<p class='text-center'>Ingresaste al Home! Bienvenido!!</p>")
+					$("#root").fadeOut(2000, function () {
+
+						$("#root").html(parrafo)
+						$("#root").fadeIn(2000)
+					})
+				}
+
+				export default homeController
+				
+				_ Aca vamos a depositar el codigo Jquery correspondiente a la pagina del home
+				
+			_ Luego importamos el controlador en router.js.
+			
+				import homeController from './controllers/homeController'
+				
+				crossroads.addRoute('/', function () {
+					$('#root').load('./partials/home.html', homeController)
+				})
